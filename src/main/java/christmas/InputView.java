@@ -12,6 +12,7 @@ public class InputView {
         return Console.readLine();
     }
 
+
     public static String get_MenuList(){
         System.out.println(GET_MENU);
         return Console.readLine();

@@ -1,12 +1,9 @@
 package christmas;
 
-import com.sun.tools.javac.Main;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,9 +44,11 @@ public class CheckValid {
     }
 
     public static boolean menuChkValid(List<String> userMenu){
-        if(!(menuChkNotIn(userMenu) || menuChkOver(listStringToInteger(userMenu)) || menuChkRange(userMenu)))
+        boolean isValid = menuChkNotIn(userMenu) && menuChkOver(listStringToInteger(userMenu)) && menuChkRange(userMenu);
+        if (!isValid) {
             throw new IllegalArgumentException(ERROR_MESSAGE + "유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-        return(menuChkNotIn(userMenu)||menuChkOver(listStringToInteger(userMenu))||menuChkRange(userMenu));
+        }
+        return isValid;
     }
 
     public static List<String> inputInMenu(List<String> userMenu){ //메뉴 추출 함수
