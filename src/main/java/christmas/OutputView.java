@@ -1,5 +1,6 @@
 package christmas;
 import camp.nextstep.edu.missionutils.Console;
+import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,4 +27,29 @@ public class OutputView {
         }
     }
 
+    public static int orderPrint(List<String>userMenu,List<Integer>userCount){
+        System.out.println("<할인 전 총 주문금액>");
+        int totalprice = 0;
+        for(int i=0;i<userMenu.size();i++){
+            int price = OrderCal.menuAll.getPriceByName(userMenu.get(i));
+            if(price !=-1){
+                totalprice +=price*userCount.get(i);
+            }
+        }
+        System.out.printf("%,d%n",totalprice);
+        return totalprice;
+    }
+
+    public static void discountPrint(int date,List<String>userMenu){
+        System.out.println("<혜택내역>");
+        System.out.printf("크리스마스 디데이 할인: %,d%n",OrderCal.discountDday(date));
+        int discountWeekend =0;
+        int discountWeekday =0;
+        for (String menu : userMenu) {
+            discountWeekday = OrderCal.discountWeekday(date, menu);
+            discountWeekend = OrderCal.discountWeekend(date, menu);
+        }
+        System.out.printf("평일 할인 : - %,d%n",discountWeekday);
+        System.out.printf("주말 할인 : - %,d%n",discountWeekend);
+    }
 }
